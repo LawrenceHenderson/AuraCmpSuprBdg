@@ -1,0 +1,9 @@
+<aura:component implements="force:appHostable, flexipage:availableForAllPageTypes">
+    <lightning:card title="Find a Boat" class="slds-m-bottom-xx-small">
+        <c:BoatSearchForm/>
+    </lightning:card>
+    <lightning:card title="Matching Boats" class="slds-m-bottom-xx-small">
+        <c:BoatSearchResults/>
+    </lightning:card>
+
+</aura:component>	

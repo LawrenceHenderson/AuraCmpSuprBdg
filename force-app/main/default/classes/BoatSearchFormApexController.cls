@@ -1,9 +1,4 @@
 public with sharing class BoatSearchFormApexController {
-     public BoatSearchFormApexController() {
-        // constructor
-
-    }
-
     @AuraEnabled
     public static List<BoatType__c> getBoatTypes()
     {

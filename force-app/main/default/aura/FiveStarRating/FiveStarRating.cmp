@@ -1,0 +1,20 @@
+<aura:component >
+    <ltng:require scripts="{!$Resource.fivestar + '/rating.js'}" 
+                  styles="{!$Resource.fivestar + '/rating.css'}" afterScriptsLoaded="{!c.afterScriptsLoaded}" />
+    
+    <aura:attribute name="value" type="Integer" default="5" />
+    <aura:attribute name="readonly" type="boolean" default="false" />
+
+    <aura:handler name="change" value="{!v.value}" action="{!c.onValueChange}"/>
+    
+    <aura:attribute name="fld1" type="String"/>
+    <aura:attribute name="fld2" type="String"/>
+    <aura:attribute name="fld3" type="String"/>    
+    <!--
+                <div>
+                <c:TestOut fld1="{!v.value}" />
+            </div>
+     -->
+    <ul aura:id="ratingarea" class="{! (readonly) ? 'readonly c-rating' : 'c-rating' }"/>
+    
+</aura:component>

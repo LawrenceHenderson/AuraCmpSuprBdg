@@ -1,0 +1,24 @@
+<aura:component >
+    <aura:attribute name="fld1" type="String"/>
+    <aura:attribute name="fld2" type="String"/>
+    <aura:attribute name="fld3" type="String"/>
+    <aura:attribute name="fld4" type="String"/>
+    <aura:attribute name="fld5" type="String"/>
+    <aura:attribute name="fld6" type="String"/>
+    <aura:attribute name="fld7" type="String"/>
+    <aura:attribute name="fld8" type="String"/>
+    <aura:attribute name="fld9" type="String"/>
+    
+    <div class="slds-p-horizontal--small">
+        <div>
+            <span class="label">FLD1:&nbsp;</span><span>{!v.fld1}</span><p/>
+            <span class="label">FLD2:&nbsp;</span><span>{!v.fld2}</span><p/>
+            <span class="label">FLD3:&nbsp;</span><span>{!v.fld3}</span>
+   <!-- 
+            <span class="label">FLD4:&nbsp;</span><span>{!v.fld4}</span>
+            <span class="label">FLD5:&nbsp;</span><span>{!v.fld5}</span>
+            <span class="label">FLD6:&nbsp;</span><span>{!v.fld6}</span>
+-->
+        </div>
+     </div>
+</aura:component>

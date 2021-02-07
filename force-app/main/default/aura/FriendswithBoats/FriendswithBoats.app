@@ -3,6 +3,8 @@
         <lightning:layoutitem>
             <c:BoatSearch/>
         </lightning:layoutitem>
+        <lightning:layoutitem>
+            <c:ceNotifier/>
+        </lightning:layoutitem>
     </lightning:layout>
- 
-</aura:application>	
+</aura:application>

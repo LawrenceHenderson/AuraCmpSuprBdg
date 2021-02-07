@@ -1,30 +1,30 @@
-<aura:component controller="BoatTileApexController" implements="force:appHostable, flexipage:availableForAllPageTypes">
+<aura:component implements="force:appHostable,forceCommunity:themeLayout">
     <aura:attribute name="boat" type="Boat__c" />
-    <!-- <aura:attribute name="boaturl" type="String" /> -->
-    <aura:attribute name="cntctnm" type="String" />
-    <!-- boaturl = "url('" + {!v.boat.Picture__c} + "')" -->
+    <aura:attribute name="selected" type="Boolean" default="false" />
 
+    <aura:attribute name="fld1" type="String"/>
+    <aura:attribute name="fld2" type="String"/>
+    <aura:attribute name="fld3" type="String"/>
+    
     <!-- Handle component init in a client-side controller -->
+    <!-- Keep -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
-
-    <lightning:button class="tile">
-        <div style="{!'background-image: url(' + v.boat.Picture__c + '); background-size: cover; background-repeat: no-repeat; width: 100%; height: 220px'}" 
-                   class="innertile">
-            <div class="lower-third">
-                <h1 class="slds-truncate">Uno: {!v.boat.Picture__c}</h1>
-                <h1 class="slds-truncate">dos: {!v.boat.Contact__r.Name}</h1>
-                <!-- <h1 class="slds-truncate">{!v.cntctnm}</h1> -->
-            </div>
-                 
-        </div >
-        <!--
-        <div ><p>Well, Well {!v.boaturl}</p>
-            <p>{!'background-image: url(' + v.boaturl + ')'}</p>
-            <p>{!'background-image: url("' + v.boaturl + '")'}</p>
-            <p>{!'style=background-image: url(' + v.boaturl + ')'}</p>
-
-        </div>
-        -->
+    <aura:registerEvent name="boatId" type="c:BoatSelect"/> 
+    <aura:registerEvent name="selboat" type="c:BoatSelected"/>  
+    <aura:registerEvent name="PlotMapMarker" type="c:PlotMapMarker"/>  
+    
+    <!-- 
+                                <c:TestOut fld1="{! v.selected == 'true'? 'tile selected': 'tile'}" 
+                               fld2="{!v.selected}" 
+                               fld3="BoatTile"
+                               />
+     -->
+    
+    <lightning:button class="{! v.selected == 'true'?'tile selected': 'tile'}" onclick="{!c.onBoatClick}"  value="{!v.boat.Id}">
+            <div style="{!'background-image: url(' + v.boat.Picture__c + '); background-size: cover; width: 100%; height:100%'}" class="innertile slds-tile">
+                <div class="lower-third slds-tile__detail">
+                    <h1 class="slds-truncate">{!v.boat.Contact__r.Name}</h1>
+                </div>
+            </div >
     </lightning:button>
-        
-</aura:component>	
+</aura:component>

@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="boatTypeId traverse components">
+    <aura:attribute name="formData" type="Object"/> 
+</aura:event>

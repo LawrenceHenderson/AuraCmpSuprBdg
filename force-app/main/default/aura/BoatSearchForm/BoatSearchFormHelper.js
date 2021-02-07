@@ -1,30 +1,24 @@
 ({
-    loadBoatTypes: function(component){
-        //create the action
-        console.log("Helper started");
+    loadBoatTypes: function(component, event, helper){
         var action = component.get("c.getBoatTypes");
-
         //add the callback behavior for when the response is received
         action.setCallback(this,function(response){
             var state = response.getState();
             if (state === "SUCCESS"){
                 component.set("v.BoatTypes", response.getReturnValue());
-                console.log(response.getReturnValue());
+                //console.log("BoatSearchFormHelper - response: " + response.getReturnValue());
 
             } else {
-                console.log("Failed with state: " + state);
-
+                console.log("BoatSearchFormHelper - Failed with state: " + state);
             }
     
         });
-
         //send action off to be executed
         $A.enqueueAction(action);
-           
-    },
-    isLightningDesktop: function (component) {
+     },
+    isLightningDesktop: function (component, event, helper) {
         //create the action
-        console.log("Helper started - isLightningDesktop");
+        // get theme UserInfo.getUiThemeDisplayed()
         var action = component.get("c.getTeams");
 
         //add the callback behavior for when the response is received
@@ -32,18 +26,14 @@
             var state = response.getState();
             if (state === "SUCCESS"){
                 component.set("v.teams", response.getReturnValue());
-                console.log("isLightningDesktop - response: " + response.getReturnValue());
+                //console.log("BoatSearchFormHelper.isLightningDesktop - response: " + response.getReturnValue());
 
             } else {
-                console.log("isLightningDesktop - Failed with state: " + state);
-
+                console.log("BoatSearchFormHelper.isLightningDesktop - Failed with state: " + state);
             }
-    
-        });
+            });
 
         //send action off to be executed
         $A.enqueueAction(action);
-
-    }    
-
+    },
 })

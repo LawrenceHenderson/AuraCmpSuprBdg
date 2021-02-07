@@ -1,0 +1,48 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:lightningQuickActionWithoutHeader,force:hasRecordId">
+                            <!-- flexipage:availableForAllPageTypes -->
+    <aura:attribute name="boat" type="Boat__c" />
+    <aura:attribute name="id" type="Id" />
+    
+    <aura:attribute name="simpleRecord" type="Object"/>
+    <aura:attribute name="recordError" type="String"/> 
+    
+    <aura:attribute name="fld1" type="String"/>
+    <aura:attribute name="fld2" type="String"/>
+    <aura:attribute name="fld3" type="String"/>    
+
+    <aura:attribute name="tabId" type="String" default="btrvdtltab"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:BoatSelected" action="{!c.onBoatSelected }"/>
+    <aura:handler name="BoatReviewAdded" event="c:BoatReviewAdded" action="{!c.onBoatReviewAdded }"/>
+    
+    <force:recordData aura:id="service"
+                      recordId="{!v.Id}"
+                      fields="Id,Name,Description__c,Price__c,Length__c,Contact__r.Name,
+                                  Contact__r.Email,Contact__r.HomePhone,BoatType__r.Name,Picture__c"
+                      targetFields="{!v.boat}"
+                      targetError="{!v.recordError}" 
+                      recordUpdated="{!c.onRecordUpdated}"
+                      />
+    
+        <lightning:tabset aura:id="tabs" selectedTabId="{!v.tabId}">
+    <!-- 
+ selectedTabId="DETAILS"
+		The component outputs three tabs labeled Details, Reviews, and Add Review, 
+        but hides the tabset if the component’s boat attribute is undefined.
+    -->
+            <aura:if  isTrue="{!v.boat}">
+            <lightning:tab label="DETAILS" id="btrvdtltab">
+            <!-- Instantiate new child component BoatDetail inside of the Details tab -->
+                <!-- <c:TestOut fld1="{!v.boat.Name}" /> -->
+                 <c:BoatDetail boat="{!v.boat}"/> 
+            </lightning:tab>
+            
+            <lightning:tab label="REVIEWS" id="boatreviewtab">
+                <c:BoatReviews aura:id="btreviews" boat="{!v.boat}"/>
+            </lightning:tab>
+            <lightning:tab label="ADD REVIEW" id="btrvaddtab">
+                <c:AddBoatReview boat="{!v.boat}"/>
+            </lightning:tab>
+                </aura:if> 
+        </lightning:tabset>	
+</aura:component>

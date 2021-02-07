@@ -1,0 +1,77 @@
+<aura:component controller="BoatReviews">
+	<aura:attribute name="boat" type="Boat__c" />
+	<aura:attribute access="private" name="boatReviews" type="BoatReview__c[]" />
+    <aura:handler name="change" value="{!v.boat}" action="{!c.doInit}"/>
+    <aura:method name="refresh" action="{!c.doInit}" access="public"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="fld1" type="String"/>
+    <aura:attribute name="fld2" type="String"/>
+    <aura:attribute name="fld3" type="String"/>
+    
+        <!-- START REVIEW -->
+     <!-- <article class="slds-post viewporta"> -->
+    <aura:if  isTrue="{! !empty(v.boatReviews)}">
+     <ui:scrollerWrapper class="viewporta">
+      <aura:iteration items="{!v.boatReviews}" var="boatReview">        
+      <article class="slds-post">
+        <header class="slds-post__header slds-media">
+            <!-- 
+            <div><c:TestOut 
+                            fld1="{#boatReview.CreatedBy.Name}" 
+                            fld2="{#boatReview.CreatedBy.SmallPhotoUrl}" />
+            </div>
+             -->
+            
+          <div class="slds-media__figure">
+            <a href="#" class="slds-avatar slds-avatar_circle slds-avatar_large">
+              <img alt="{#boatReview.CreatedBy.Name}" 
+                   src='{#boatReview.CreatedBy.SmallPhotoUrl}' title="{#boatReview.CreatedBy.Name}" />
+            </a>
+          </div>
+          <div class="slds-media__body">
+            <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+              <p>
+           <!-- <a href="#" title="{#boatReview.CreatedBy.Name}">{#boatReview.CreatedBy.Name}</a>&nbsp;&#8722;&nbsp; -->
+                <a href="javascript:void(0)" title="{#boatReview.CreatedBy.Name}" onclick="{!c.onUserInfoClick}" 
+                   data-userid="{!boatReview.CreatedBy.Id}">{#boatReview.CreatedBy.Name}</a>&nbsp;&#8722;&nbsp;{#boatReview.CreatedBy.CompanyName}
+           <!-- <a href="#" title="{#boatReview.CreatedBy.CompanyName}">{#boatReview.CreatedBy.CompanyName}</a> -->
+              </p>     
+                
+            </div>
+              <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                  <p><lightning:formattedDateTime value="{#boatReview.LastModifiedDate}" 
+                         year="numeric" day="2-digit" month="short" hour="2-digit" minute="2-digit" second="2-digit"/>
+                  </p>
+              </div>
+          </div>
+        </header>
+        <div class="slds-text-longform">
+          <p>{#boatReview.Name}</p>
+        </div>
+        <div class="slds-text-longform">
+            <lightning:formattedRichText value="{#boatReview.Comment__c}" />
+                    <!--     
+            <div>
+                <c:TestOut fld1="{#boatReview.Rating__c}" />
+            </div>
+             -->
+            
+        </div>
+          <div class="slds-form slds-form_stacked">
+              <c:FiveStarRating value="{#boatReview.Rating__c}" readonly="true"/>
+          </div>          
+      </article>
+      </aura:iteration>
+    <!-- </article>           -->
+    </ui:scrollerWrapper>
+    <aura:set attribute="else">
+        <lightning:layout>           
+            <lightning:layoutItem class="slds-align_absolute-center">
+                <H1>No Reviews Available</H1>
+            </lightning:layoutItem>
+        </lightning:layout>    
+    </aura:set>
+    </aura:if>
+ <!-- END REVIEW -->
+    </aura:component>

@@ -1,0 +1,45 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
+    <aura:attribute name="boat" type="Boat__c" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="boatReview" type="BoatReview__c" />
+    <!-- <aura:attribute name="simpleNewBoatReview" type="Object"/> -->
+    <aura:attribute name="newBoatReview" type="Object"/>
+    <aura:attribute access="private" name="recordError" type="String"/>    
+    
+    <aura:registerEvent name="BoatReviewAdded" type="c:BoatReviewAdded"/>
+
+                      <!-- targetFields="{!v.simpleNewBoatReview}" -->
+    
+    <force:recordData aura:id="service" 
+                      fields="Id, Name, Comment__c, Boat__c"
+                      targetRecord="{!v.newBoatReview}"
+                      targetFields="{!v.boatReview}"
+                      targetError="{!v.recordError}" 
+                      recordUpdated="{!c.onRecordUpdated}"/>
+    
+    <div class="slds-grid slds-grid--vertical slds-p-around_medium">
+        <lightning:input aura:id="braid" name="title" label="Title:" value="{!v.boatReview.Name}"/>
+        <lightning:inputRichText
+                                aura:id="braid" 
+                                disabledCategories="FORMAT_FONT"
+                                labelVisible="true" 
+                                label="Description:" 
+                                value="{!v.boatReview.Comment__c}"
+                                             >
+        </lightning:inputRichText>
+    </div>
+          <div class="slds-form slds-form_stacked">
+              <c:FiveStarRating value="{!v.boatReview.Rating__c}" readonly="false"/>
+          </div>     
+    <div class="slds-grid slds-grid--align-center">
+        <lightning:button class="slds-button" variant="Neutral" iconName="utility:save" label="Submit"  onclick="{!c.onSave}"/>
+    </div>
+    
+    <!-- Display Lightning Data Service errors -->
+    <aura:if isTrue="{!not(empty(v.recordError))}">
+        <div class="recordError">
+            {!v.recordError}</div>
+    </aura:if>    
+</aura:component>
